@@ -2,6 +2,7 @@ package com.jo.woo.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,15 +37,21 @@ public class MeasureFragment extends Fragment {
     private void makeView(){
         ((Button)wholeView.findViewById(R.id.btnMeasure_measure)).setOnClickListener(click);
         ((Button)wholeView.findViewById(R.id.btnMeasure_back)).setOnClickListener(click);
+        ((Button)wholeView.findViewById(R.id.bluetoothButton)).setOnClickListener(click);
+//        ((Button)wholeView.findViewById(R.id.moveToValue)).setOnClickListener(click);
     }
 
     View.OnClickListener click = new View.OnClickListener(){
         @Override
         public void onClick(View v){
-            if(v.getId() == R.id.btnMeasure_measure)
-                ((MainActivity)getActivity()).moveFragment(Constants.VALUE);
+            if(v.getId() == R.id.btnMeasure_measure){
+                ((MainActivity)getActivity()).getDataFromBluetooth();
+            }
             else if(v.getId() == R.id.btnMeasure_back)
                 ((MainActivity)getActivity()).moveFragment(Constants.MENU);
+            else if(v.getId() == R.id.bluetoothButton){
+                ((MainActivity)getActivity()).connectBluetooth();
+            }
         }
     };
 }
